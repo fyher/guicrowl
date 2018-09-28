@@ -1,0 +1,49 @@
+fos_elastica:
+  clients:
+    default: { host: '%env(resolve:ELASTIC_URL)%' , port: 9200 , username: '%env(resolve:ELASTIC_LOGIN)%' , password: '%env(resolve:ELASTIC_PSSWD)%'}
+  indexes:
+    crowl_traitement_data:
+      settings:
+        number_of_shards: 4
+        analysis:
+          filter:
+            autocomplete_filter:
+              type: edge_ngram
+              min_gram: 1
+              max_gram: 20
+          analyzer:
+            autocomplete_analyzer:
+              type: custom
+              tokenizer: standard
+              filter: [lowercase, autocomplete_filter]
+      types:
+        url:
+          properties:
+            id: {type: integer}
+            idTraitemnt: {type: integer}
+            url: {type: text, analyzer: autocomplete_analyzer, search_analyzer: standard , fields: { keyword : { type: keyword }, std: {type: text, analyzer: french }}}
+            h1: {type: text, analyzer: autocomplete_analyzer, search_analyzer: standard , fields: { keyword : { type: keyword }, std: {type: text, analyzer: french }}}
+            h2: {type: text, analyzer: autocomplete_analyzer, search_analyzer: standard , fields: { keyword : { type: keyword }, std: {type: text, analyzer: french }}}
+            h3: {type: text, analyzer: autocomplete_analyzer, search_analyzer: standard , fields: { keyword : { type: keyword }, std: {type: text, analyzer: french }}}
+            h4: {type: text, analyzer: autocomplete_analyzer, search_analyzer: standard , fields: { keyword : { type: keyword }, std: {type: text, analyzer: french }}}
+            h5: {type: text, analyzer: autocomplete_analyzer, search_analyzer: standard , fields: { keyword : { type: keyword }, std: {type: text, analyzer: french }}}
+            h6: {type: text, analyzer: autocomplete_analyzer, search_analyzer: standard , fields: { keyword : { type: keyword }, std: {type: text, analyzer: french }}}
+            h7: {type: text, analyzer: autocomplete_analyzer, search_analyzer: standard , fields: { keyword : { type: keyword }, std: {type: text, analyzer: french }}}
+            responseCode: {type: text, analyzer: autocomplete_analyzer, search_analyzer: standard , fields: { keyword : { type: keyword }, std: {type: text, analyzer: french }}}
+            level : {type: integer}
+            referer: {type: text, analyzer: autocomplete_analyzer, search_analyzer: standard , fields: { keyword : { type: keyword }, std: {type: text, analyzer: french }}}
+            metaDescription : {type: text, analyzer: autocomplete_analyzer, search_analyzer: standard , fields: { keyword : { type: keyword }, std: {type: text, analyzer: french }}}
+            latency: {type: float}
+            title: {type: text, analyzer: autocomplete_analyzer, search_analyzer: standard , fields: { keyword : { type: keyword }, std: {type: text, analyzer: french }}}
+            canonical: {type: text, analyzer: autocomplete_analyzer, search_analyzer: standard , fields: { keyword : { type: keyword }, std: {type: text, analyzer: french }}}
+            wordCount: {type: integer}
+          persistence:
+            driver: orm
+            model: App\Entity\TraitementData
+            provider: ~
+            listener: ~
+            finder: ~
+
+
+
+

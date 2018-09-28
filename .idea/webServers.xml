@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="37f063ab-7fef-4375-94d2-4f5d4f7686dd" name="serveur" url="http://54.38.32.48">
+        <fileTransfer host="54.38.32.48" port="22" rootFolder="/var/www/html/guicrowl/" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
