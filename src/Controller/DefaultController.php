@@ -46,28 +46,47 @@ class DefaultController extends AbstractController
             $em->flush();
 
 
-            $urlelastic="http://token:56$2MT42G$!@149.202.164.105:9200";
+
+           $commande="python3 /var/www/crowl2/crowl.py -u ".$form["urlsite"]->getData()." --conf_file /var/www/crowl2/config.ini -b test --links --urlelastic ".$urlelastic." --idtraitement ".$traitement->getId();
 
 
-           $commande="python3 /var/www/crowl2/crowl.py -u ".$form["urlsite"]->getData()." --conf_file /var/www/crowl2/config.ini -b test --urlelastic ".$urlelastic." --idtraitement ".$traitement->getId();
-
-
-           dump($commande);
+           //dump($commande);
             // exit();
             //exec($commande);
-           /* $process=new Process($commande);
+            $process=new Process($commande);
             $process->setTimeout(3600000);
             $process->start();
 
+            //$pid=$process->getPid();
+           // dump($pid);
+            //posix_getegid($pid);
 
-            $em->flush();*/
+           // $em->flush();
 
-           // return $this->redirectToRoute("client_client_liste");
+            return $this->redirectToRoute("affiche_traitement",array("hash"=>$traitement->getHashTraitement()));
         }
 
 
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',"form"=>$form->createView()
         ]);
+    }
+
+
+    /**
+     * @param Request $request
+     * @param $hashtraitement
+     * @Route("/affichetraitement/{hash}" , name="affiche_traitement")
+     */
+    public function affichetraitementAction(Request $request,$hashtraitement){
+
+        //on se connecte à elastic et on affiche les informations du traitement
+        $infotraitement=$this->getDoctrine()->getRepository("App:Traitement")->findOneBy(array("hashTraitement"=>$hashtraitement));
+
+        if(!$infotraitement){
+            return $this->redirectToRoute("default");
+        }
+
+        //on va chercher toute les informations et on trouve un moyen de refraichir la page correctement ^^
     }
 }

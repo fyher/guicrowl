@@ -34,6 +34,7 @@ fos_elastica:
             referer: {type: text, analyzer: autocomplete_analyzer, search_analyzer: standard , fields: { keyword : { type: keyword }, std: {type: text, analyzer: french }}}
             metaDescription : {type: text, analyzer: autocomplete_analyzer, search_analyzer: standard , fields: { keyword : { type: keyword }, std: {type: text, analyzer: french }}}
             latency: {type: float}
+            outlinks: {type: integer}
             title: {type: text, analyzer: autocomplete_analyzer, search_analyzer: standard , fields: { keyword : { type: keyword }, std: {type: text, analyzer: french }}}
             canonical: {type: text, analyzer: autocomplete_analyzer, search_analyzer: standard , fields: { keyword : { type: keyword }, std: {type: text, analyzer: french }}}
             wordCount: {type: integer}
@@ -43,6 +44,38 @@ fos_elastica:
             provider: ~
             listener: ~
             finder: ~
+    crowl_links_data:
+      settings:
+        number_of_shards: 4
+        analysis:
+          filter:
+            autocomplete_filter:
+              type: edge_ngram
+              min_gram: 1
+              max_gram: 20
+          analyzer:
+            autocomplete_analyzer:
+              type: custom
+              tokenizer: standard
+              filter: [lowercase, autocomplete_filter]
+      types:
+        link:
+          properties:
+            id: {type: integer}
+            idTraitement: {type: integer}
+            source: {type: text, analyzer: autocomplete_analyzer, search_analyzer: standard , fields: { keyword : { type: keyword }, std: {type: text, analyzer: french }}}
+            target: {type: text, analyzer: autocomplete_analyzer, search_analyzer: standard , fields: { keyword : { type: keyword }, std: {type: text, analyzer: french }}}
+            text: {type: text, analyzer: autocomplete_analyzer, search_analyzer: standard , fields: { keyword : { type: keyword }, std: {type: text, analyzer: french }}}
+            weight: {type: integer}
+            nofollow: {type: boolean}
+            disallow: {type: boolean}
+          persistence:
+            driver: orm
+            model: App\Entity\TraitementLinks
+            provider: ~
+            listener: ~
+            finder: ~
+
 
 
 

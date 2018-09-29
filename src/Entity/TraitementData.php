@@ -132,6 +132,13 @@ class TraitementData
      */
     private $canonical;
 
+
+    /**
+     * @var integer
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $outlinks;
+
     /**
      * @var integer
      * @ORM\Column(type="integer", nullable=true)
@@ -343,6 +350,18 @@ class TraitementData
     public function setWordCount(?int $wordCount): self
     {
         $this->wordCount = $wordCount;
+
+        return $this;
+    }
+
+    public function getOutlinks(): ?int
+    {
+        return $this->outlinks;
+    }
+
+    public function setOutlinks(?int $outlinks): self
+    {
+        $this->outlinks = $outlinks;
 
         return $this;
     }
