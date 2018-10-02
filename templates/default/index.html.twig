@@ -3,12 +3,7 @@
 {% block title %}{% endblock %}
 
 {% block body %}
-    <div class="row" style="margin-top:100px;">
-        <div class="col-md-12" align="center" style="color:#ffffff;">
-            <h1>Analyse ton site</h1>
-        </div>
-    </div>
-    <br>
+
     <div class="row">
         <div class="col-md-2">
 
@@ -30,6 +25,19 @@
         </div>
         <div class="col-md-2">
 
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <b>Les derniers sites</b>
+            {% for l in listetraitement %}
+                <div class="" style="background-color: #ffffff;padding:10px;border-radius: 5px">
+                  <a href="{{ l.urlSite}}" class="link" target="_blank"> {{ l.urlSite}} </a>
+                    <a href="{{ url("affiche_traitement",{"hashtraitement":l.hashTraitement}) }}" class="btn btn-info btn-sm">Voir le traitement</a>
+                </div>
+                <br>
+            {% endfor %}
         </div>
     </div>
 

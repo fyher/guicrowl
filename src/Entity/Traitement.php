@@ -53,6 +53,12 @@ class Traitement
     private $end;
 
     /**
+     * @var integer
+     * @ORM\Column(type="integer", nullable=false)
+     */
+    private $pid;
+
+    /**
      * @var string
      * @ORM\Column(type="string", nullable=false)
      */
@@ -107,6 +113,18 @@ class Traitement
     public function setEnd(bool $end): self
     {
         $this->end = $end;
+
+        return $this;
+    }
+
+    public function getPid(): ?int
+    {
+        return $this->pid;
+    }
+
+    public function setPid(int $pid): self
+    {
+        $this->pid = $pid;
 
         return $this;
     }

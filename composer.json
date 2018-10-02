@@ -6,15 +6,21 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "friendsofsymfony/elastica-bundle": "^5.0",
+        "friendsofsymfony/jsrouting-bundle": "^2.2",
+        "knplabs/knp-paginator-bundle": "^2.8",
+        "sensio/framework-extra-bundle": "^5.2",
         "symfony/apache-pack": "^1.0",
         "symfony/asset": "*",
         "symfony/console": "*",
+        "symfony/dependency-injection": "*",
         "symfony/flex": "^1.1",
         "symfony/form": "*",
         "symfony/framework-bundle": "*",
         "symfony/maker-bundle": "^1.7",
         "symfony/orm-pack": "^1.0",
         "symfony/process": "*",
+        "symfony/security-csrf": "*",
+        "symfony/templating": "*",
         "symfony/twig-bundle": "*",
         "symfony/validator": "*",
         "symfony/yaml": "*"
@@ -64,7 +70,7 @@
     },
     "extra": {
         "symfony": {
-            "allow-contrib": false,
+            "allow-contrib": "true",
             "require": "4.1.*"
         }
     }

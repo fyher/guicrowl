@@ -46,45 +46,45 @@ class TraitementData
     private $url;
 
     /**
-     * @var array
-     * @ORM\Column(type="array", nullable=true)
+     * @var jsarrayon
+     * @ORM\Column(type="json_array", nullable=true)
      */
     private $h1;
 
     /**
      * @var array
-     * @ORM\Column(type="array", nullable=true)
+     * @ORM\Column(type="json_array", nullable=true)
      */
     private $h2;
 
 
     /**
      * @var array
-     * @ORM\Column(type="array", nullable=true)
+     * @ORM\Column(type="json_array", nullable=true)
      */
     private $h3;
 
     /**
      * @var array
-     * @ORM\Column(type="array", nullable=true)
+     * @ORM\Column(type="json_array", nullable=true)
      */
     private $h4;
 
     /**
      * @var array
-     * @ORM\Column(type="array", nullable=true)
+     * @ORM\Column(type="json", nullable=true)
      */
     private $h5;
 
     /**
      * @var array
-     * @ORM\Column(type="array", nullable=true)
+     * @ORM\Column(type="json_array", nullable=true)
      */
     private $h6;
 
     /**
      * @var array
-     * @ORM\Column(type="array", nullable=true)
+     * @ORM\Column(type="json_array", nullable=true)
      */
     private $h7;
 
@@ -342,18 +342,6 @@ class TraitementData
         return $this;
     }
 
-    public function getWordCount(): ?int
-    {
-        return $this->wordCount;
-    }
-
-    public function setWordCount(?int $wordCount): self
-    {
-        $this->wordCount = $wordCount;
-
-        return $this;
-    }
-
     public function getOutlinks(): ?int
     {
         return $this->outlinks;
@@ -366,5 +354,20 @@ class TraitementData
         return $this;
     }
 
+    public function getWordCount(): ?int
+    {
+        return $this->wordCount;
+    }
+
+    public function setWordCount(?int $wordCount): self
+    {
+        $this->wordCount = $wordCount;
+
+        return $this;
+    }
+
+   
+  
+   
 
 }

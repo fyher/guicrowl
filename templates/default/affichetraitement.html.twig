@@ -1,0 +1,87 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <br>
+    <div class="container" >
+        <div class="row">
+            <div class="col-md-8" align="center">
+               <h1 style="color:#ffffff;">{{ traitement.urlSite }}</h1>
+                <div class="count" style="color:#ffffff;">
+                    {{ pagination.getTotalItemCount }} Urls
+                </div>
+            </div>
+            <div class="col-md-2" >
+                <a class="btn btn-success btn-lg btn-block" href="{{ url("export_csv",{"hashtraitement":traitement.hashTraitement}) }}">Export CSV</a>
+            </div>
+            <div class="col-md-2">
+                <a href="{{ url("default") }}" class="btn btn-info btn-bock btn-lg">Nouveau Scrap </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+
+                {% for p in pagination %}
+                    {% set info=infoelastic.infolink(p.url,traitement.id) %}
+                    <div class="" style="background-color:#ffffff;padding:10px;border-radius: 5px;">
+                        <span style="color:#1c1ba8;">{{ p.title |capitalize }}</span> (Level: {{ p.level }} - latency: {{ p.latency | number_format(2) }}- outlinks : {{ p.outlinks }}) <br>
+                        <a href="{{ p.url }}" style="color:#0a6525" target="_blank">{{ p.url }}</a> <br>
+                        <span style="color:#545454;">{{ p.metaDescription }}</span>  <br>
+
+                        {% for h1 in p.h1 %}
+                            {% if h1!="none" %}
+                             <span class="badge badge-info">h1</span>   {{ h1 }} <br>
+                            {% endif %}
+                        {% endfor %}
+                        {% for h2 in p.h2 %}
+                            {% if h2!="none" %}
+                            |-<span class="badge badge-info">h2</span>   {{ h2 }} <br>
+                            {% endif %}
+                        {% endfor %}
+                        {% for h3 in p.h3 %}
+                            {% if h3!="none" %}
+                            |--<span class="badge badge-info">h3</span>   {{ h3 }} <br>
+                            {% endif %}
+                        {% endfor %}
+                        {% for h4 in p.h4 %}
+                            {% if h4!="none" %}
+                            |---<span class="badge badge-info">h4</span>   {{ h4 }} <br>
+                            {% endif %}
+                        {% endfor %}
+                        {% for h5 in p.h5 %}
+                            {% if h5!="none" %}
+                             |----<span class="badge badge-info">h5</span>   {{ h5 }} <br>
+                            {% endif %}
+                        {% endfor %}
+                        {% for h6 in p.h6 %}
+                            {% if h6!="none" %}
+                            |-----<span class="badge badge-info">h6</span>   {{ h6 }} <br>
+                            {% endif %}
+                        {% endfor %}
+                        {% for h7 in p.h7 %}
+                            {% if h7!="none" %}
+                             |------<span class="badge badge-info">h7</span>   {{ h7 }} <br>
+                            {% endif %}
+                        {% endfor %}
+                        <br>
+                        {% if info %}
+                            <b>Liste outlinks</b> <br>
+                           {% for i in info %}
+                                    <a href="{{ i.target }}" target="_blank" class="link">{{ i.target }}</a>  <br>
+                            {% endfor %}
+                        {% endif %}
+
+                    </div>
+                    <br>
+
+                {% endfor %}
+
+                <div class="navigation">
+                    {{ knp_pagination_render(pagination) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
